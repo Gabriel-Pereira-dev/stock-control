@@ -1,7 +1,13 @@
 // tailwind.config.js
-import PrimeUI from 'tailwindcss-primeui';
+const PrimeUI = require('tailwindcss-primeui');
 
-export default {
-  // ...
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{html,ts}', // ✅ arquivos que o VS Code deve indexar
+  ],
+  theme: {
+    extend: {},
+  },
   plugins: [PrimeUI],
 };

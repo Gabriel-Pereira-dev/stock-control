@@ -1,0 +1,13 @@
+{
+  "tailwindCSS.includeLanguages": {
+    "typescript": "html",
+    "html": "html",
+    "scss": "css"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class\\s*=\\s*\"([^\"]*)", 1],
+    ["class:\\s*'([^']*)", 1],
+    ["class:\\s*\"([^\"]*)", 1]
+  ],
+  "tailwindCSS.experimental.configFile": "src/styles.scss"
+}

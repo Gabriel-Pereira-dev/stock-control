@@ -1,8 +1,9 @@
 .grid {
-  background-image: url('/public/fundo.jpg');
+  background-image: url('/fundo.jpg') !important;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: blueviolet;
   height: 100vmin;
 }
 
