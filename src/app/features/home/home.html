@@ -3,22 +3,22 @@
     <div class="flex justify-center items-center text-center">
       <!-- LOGIN -->
       @if (showLoginCard) {
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
         <p-card header="Login" subheader="Faça login com sua conta existente!" styleClass="mt-10">
           <div class="flex justify-center items-center text-center">
-            <input type="email" pInputText placeholder="Email" />
+            <input type="email" pInputText placeholder="Email" formControlName="email" />
           </div>
 
-          <div class="flex justify-center items-center text-center mt-3">
-            <input type="password" pInputText placeholder="Senha" />
+          <div class="flex justify-center items-center text-center !mt-3">
+            <input type="password" pInputText placeholder="Senha" formControlName="password" />
           </div>
 
-          <div class="card flex justify-center mt-3">
-            <button type="submit" pButton pRipple>Login</button>
+          <div class="card flex justify-center !mt-3">
+            <button type="submit" pButton pRipple [disabled]="!loginForm.valid">Login</button>
           </div>
 
           <span
-            class="flex justify-center items-center text-center mt-3 text-red-600 font-semibold"
+            class="flex justify-center items-center text-center !mt-3 text-red-600 font-semibold"
             (click)="alternateShowLoginCard()"
             (keydown.enter)="alternateShowLoginCard()"
             (keydown.space)="alternateShowLoginCard()"
@@ -31,26 +31,28 @@
       }
       <!-- SIGNUP -->
       @if (!showLoginCard) {
-      <form>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignupForm()">
         <p-card header="Criar conta" subheader="Crie já sua conta gratuita!" styleClass="mt-10">
           <div class="flex justify-center items-center text-center">
-            <input type="text" pInputText placeholder="Nome" />
+            <input type="text" pInputText placeholder="Nome" formControlName="name" />
           </div>
 
-          <div class="flex justify-center items-center text-center mt-3">
-            <input type="email" pInputText placeholder="Email" />
+          <div class="flex justify-center items-center text-center !mt-3">
+            <input type="email" pInputText placeholder="Email" formControlName="email" />
           </div>
 
-          <div class="flex justify-center items-center text-center mt-3">
-            <input type="password" pInputText placeholder="Senha" />
+          <div class="flex justify-center items-center text-center !mt-3">
+            <input type="password" pInputText placeholder="Senha" formControlName="password" />
           </div>
 
-          <div class="card flex justify-center mt-3">
-            <button type="submit" pButton pRipple>Criar conta</button>
+          <div class="card flex justify-center !mt-3">
+            <button type="submit" pButton pRipple [disabled]="!signupForm.valid">
+              Criar conta
+            </button>
           </div>
 
           <span
-            class="flex justify-center items-center text-center mt-3 text-red-600 font-semibold"
+            class="flex justify-center items-center text-center !mt-3 text-red-600 font-semibold"
             (click)="alternateShowLoginCard()"
             (keydown.enter)="alternateShowLoginCard()"
             (keydown.space)="alternateShowLoginCard()"
