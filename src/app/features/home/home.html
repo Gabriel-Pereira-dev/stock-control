@@ -7,10 +7,22 @@
         <p-card header="Login" subheader="Faça login com sua conta existente!" styleClass="mt-10">
           <div class="flex justify-center items-center text-center">
             <input type="email" pInputText placeholder="Email" formControlName="email" />
+            <small
+              class="p-error !text-sm text-red-500 flex justify-start !py-1"
+              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+            >
+              {{ getFormError('email') }}
+            </small>
           </div>
 
-          <div class="flex justify-center items-center text-center !mt-3">
+          <div class="flex justify-center items-center text-center !mt-2">
             <input type="password" pInputText placeholder="Senha" formControlName="password" />
+            <small
+              class="p-error !text-sm text-red-500 flex justify-start !py-1"
+              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+            >
+              {{ getFormError('password') }}
+            </small>
           </div>
 
           <div class="card flex justify-center !mt-3">
@@ -18,7 +30,7 @@
           </div>
 
           <span
-            class="flex justify-center items-center text-center !mt-3 text-red-600 font-semibold"
+            class="flex justify-center items-center text-center !mt-2 text-red-600 font-semibold"
             (click)="alternateShowLoginCard()"
             (keydown.enter)="alternateShowLoginCard()"
             (keydown.space)="alternateShowLoginCard()"
@@ -36,13 +48,30 @@
           <div class="flex justify-center items-center text-center">
             <input type="text" pInputText placeholder="Nome" formControlName="name" />
           </div>
-
-          <div class="flex justify-center items-center text-center !mt-3">
+          <small
+            class="p-error !text-sm text-red-500 flex justify-start !py-1"
+            *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid"
+          >
+            {{ getFormError('name') }}
+          </small>
+          <div class="flex justify-center items-center text-center !mt-2">
             <input type="email" pInputText placeholder="Email" formControlName="email" />
+            <small
+              class="p-error !text-sm text-red-500 flex justify-start !py-1"
+              *ngIf="email?.touched && email?.invalid"
+            >
+              {{ getFormError('email') }}
+            </small>
           </div>
 
-          <div class="flex justify-center items-center text-center !mt-3">
+          <div class="flex justify-center items-center text-center !mt-2">
             <input type="password" pInputText placeholder="Senha" formControlName="password" />
+            <small
+              class="p-error !text-sm text-red-500 flex justify-start !py-1"
+              *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+            >
+              {{ getFormError('password') }}
+            </small>
           </div>
 
           <div class="card flex justify-center !mt-3">
@@ -52,7 +81,7 @@
           </div>
 
           <span
-            class="flex justify-center items-center text-center !mt-3 text-red-600 font-semibold"
+            class="flex justify-center items-center text-center !mt-2 text-red-600 font-semibold"
             (click)="alternateShowLoginCard()"
             (keydown.enter)="alternateShowLoginCard()"
             (keydown.space)="alternateShowLoginCard()"
