@@ -12,6 +12,7 @@ import { User } from '@core/services/user/user';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthRequest } from '@models/interfaces/auth/AuthRequest';
 import { SignupUserRequest } from '@models/interfaces/SignupUserRequest';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class Home {
   private readonly formBuilder = inject(FormBuilder);
   private readonly userService = inject(User);
   private readonly cookieService = inject(CookieService);
+  private readonly messageService = inject(MessageService);
 
   //Properties
   showLoginCard = true;
@@ -85,11 +87,19 @@ export class Home {
       this.userService.authUser(this.loginForm.value as AuthRequest).subscribe({
         next: (response) => {
           this.cookieService.set('USER_INFO', response?.token);
-          alert(`Login ${response.email} feito com sucesso!!!`);
-          console.log(response);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: `Bem vindo de volta ${response.name}!`,
+          });
           this.loginForm.reset();
         },
         error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao fazer o login!',
+          });
           console.error('Login failed!!!', error);
         },
       });
@@ -102,11 +112,21 @@ export class Home {
       this.userService.signupUser(this.signupForm.value as SignupUserRequest).subscribe({
         next: (response) => {
           alert(`Usuário ${response.email} criado com sucesso!!!`);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sucesso',
+            detail: 'Usuário criado com sucesso!',
+          });
           console.log(response);
           this.signupForm.reset();
           this.showLoginCard = true;
         },
         error: (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao criar usuário!',
+          });
           console.error('Signup failed!!!', error);
         },
       });
