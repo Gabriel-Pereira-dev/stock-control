@@ -50,6 +50,8 @@ export class Home {
   //Methods
   alternateShowLoginCard() {
     this.showLoginCard = !this.showLoginCard;
+    this.loginForm.reset();
+    this.signupForm.reset();
   }
 
   get email() {
@@ -68,7 +70,6 @@ export class Home {
     const control = this.showLoginCard
       ? this.loginForm.get(controlName)
       : this.signupForm.get(controlName);
-    console.log(control?.errors);
     if (!control?.errors) return '';
 
     if (control.errors['required']) return 'Campo obrigatório.';
@@ -83,7 +84,6 @@ export class Home {
 
   onSubmitLoginForm(): void {
     if (this.loginForm.value && this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.userService.authUser(this.loginForm.value as AuthRequest).subscribe({
         next: (response) => {
           this.cookieService.set('USER_INFO', response?.token);
@@ -108,16 +108,13 @@ export class Home {
 
   onSubmitSignupForm(): void {
     if (this.signupForm.value && this.signupForm.valid) {
-      console.log(this.signupForm.value);
       this.userService.signupUser(this.signupForm.value as SignupUserRequest).subscribe({
-        next: (response) => {
-          alert(`Usuário ${response.email} criado com sucesso!!!`);
+        next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Sucesso',
             detail: 'Usuário criado com sucesso!',
           });
-          console.log(response);
           this.signupForm.reset();
           this.showLoginCard = true;
         },

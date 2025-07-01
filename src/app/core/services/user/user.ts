@@ -5,6 +5,7 @@ import { AuthRequest } from '@models/interfaces/auth/AuthRequest';
 import { AuthResponse } from '@models/interfaces/auth/AuthResponse';
 import { SignupUserRequest } from '@models/interfaces/SignupUserRequest';
 import { SignupUserResponse } from '@models/interfaces/SignupUserResponse';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
 export class User {
   //Injects
   private readonly http = inject(HttpClient);
+  private readonly cookieService = inject(CookieService);
 
   //Properties
   private readonly API_URL = environment.API_URL;
@@ -31,5 +33,10 @@ export class User {
       ${this.API_URL}/auth`,
       requestData,
     );
+  }
+
+  isLoggedIn(): boolean {
+    const JWT_TOKEN = this.cookieService.get('USER_INFO');
+    return Boolean(JWT_TOKEN);
   }
 }

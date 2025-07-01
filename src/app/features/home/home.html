@@ -6,24 +6,36 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
         <p-card header="Login" subheader="Faça login com sua conta existente!" styleClass="mt-10">
           <div class="flex justify-center items-center text-center">
-            <input type="email" pInputText placeholder="Email" formControlName="email" />
-            <small
-              class="p-error !text-sm text-red-500 flex justify-start !py-1"
-              *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
-            >
-              {{ getFormError('email') }}
-            </small>
+            <input
+              type="email"
+              pInputText
+              placeholder="Email"
+              formControlName="email"
+              autocomplete="username"
+            />
           </div>
+          <small
+            class="p-error !text-sm text-red-500 flex justify-start !pl-5 !py-1"
+            *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+          >
+            {{ getFormError('email') }}
+          </small>
 
           <div class="flex justify-center items-center text-center !mt-2">
-            <input type="password" pInputText placeholder="Senha" formControlName="password" />
-            <small
-              class="p-error !text-sm text-red-500 flex justify-start !py-1"
-              *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
-            >
-              {{ getFormError('password') }}
-            </small>
+            <input
+              type="password"
+              pInputText
+              placeholder="Senha"
+              formControlName="password"
+              autocomplete="current-password"
+            />
           </div>
+          <small
+            class="p-error !text-sm text-red-500 flex justify-start !pl-5 !py-1"
+            *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+          >
+            {{ getFormError('password') }}
+          </small>
 
           <div class="card flex justify-center !mt-3">
             <button type="submit" pButton pRipple [disabled]="!loginForm.valid">Login</button>
@@ -46,7 +58,13 @@
       <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignupForm()">
         <p-card header="Criar conta" subheader="Crie já sua conta gratuita!" styleClass="mt-10">
           <div class="flex justify-center items-center text-center">
-            <input type="text" pInputText placeholder="Nome" formControlName="name" />
+            <input
+              type="text"
+              pInputText
+              placeholder="Nome"
+              formControlName="name"
+              autocomplete="name"
+            />
           </div>
           <small
             class="p-error !text-sm text-red-500 flex justify-start !py-1"
@@ -55,24 +73,36 @@
             {{ getFormError('name') }}
           </small>
           <div class="flex justify-center items-center text-center !mt-2">
-            <input type="email" pInputText placeholder="Email" formControlName="email" />
-            <small
-              class="p-error !text-sm text-red-500 flex justify-start !py-1"
-              *ngIf="email?.touched && email?.invalid"
-            >
-              {{ getFormError('email') }}
-            </small>
+            <input
+              type="email"
+              pInputText
+              placeholder="Email"
+              formControlName="email"
+              autocomplete="username"
+            />
           </div>
+          <small
+            class="p-error !text-sm text-red-500 flex justify-start !py-1"
+            *ngIf="email?.touched && email?.invalid"
+          >
+            {{ getFormError('email') }}
+          </small>
 
           <div class="flex justify-center items-center text-center !mt-2">
-            <input type="password" pInputText placeholder="Senha" formControlName="password" />
-            <small
-              class="p-error !text-sm text-red-500 flex justify-start !py-1"
-              *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
-            >
-              {{ getFormError('password') }}
-            </small>
+            <input
+              type="password"
+              pInputText
+              placeholder="Senha"
+              formControlName="password"
+              autocomplete="new-password"
+            />
           </div>
+          <small
+            class="p-error !text-sm text-red-500 flex justify-start !py-1"
+            *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+          >
+            {{ getFormError('password') }}
+          </small>
 
           <div class="card flex justify-center !mt-3">
             <button type="submit" pButton pRipple [disabled]="!signupForm.valid">
