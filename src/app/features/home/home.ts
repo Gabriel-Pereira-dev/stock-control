@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthRequest } from '@models/interfaces/auth/AuthRequest';
 import { SignupUserRequest } from '@models/interfaces/SignupUserRequest';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,7 @@ export class Home {
   private readonly userService = inject(User);
   private readonly cookieService = inject(CookieService);
   private readonly messageService = inject(MessageService);
+  private readonly router = inject(Router);
 
   //Properties
   showLoginCard = true;
@@ -86,13 +88,17 @@ export class Home {
     if (this.loginForm.value && this.loginForm.valid) {
       this.userService.authUser(this.loginForm.value as AuthRequest).subscribe({
         next: (response) => {
-          this.cookieService.set('USER_INFO', response?.token);
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sucesso',
-            detail: `Bem vindo de volta ${response.name}!`,
-          });
-          this.loginForm.reset();
+          if (response) {
+            this.cookieService.set('USER_INFO', response?.token);
+
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: `Bem vindo de volta ${response.name}!`,
+            });
+            this.loginForm.reset();
+            this.router.navigate(['/dashboard']);
+          }
         },
         error: (error) => {
           this.messageService.add({
@@ -109,14 +115,16 @@ export class Home {
   onSubmitSignupForm(): void {
     if (this.signupForm.value && this.signupForm.valid) {
       this.userService.signupUser(this.signupForm.value as SignupUserRequest).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Sucesso',
-            detail: 'Usuário criado com sucesso!',
-          });
-          this.signupForm.reset();
-          this.showLoginCard = true;
+        next: (response) => {
+          if (response) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Usuário criado com sucesso!',
+            });
+            this.signupForm.reset();
+            this.showLoginCard = true;
+          }
         },
         error: (error) => {
           this.messageService.add({
